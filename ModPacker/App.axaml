@@ -1,0 +1,74 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ModPacker.App"
+             RequestedThemeVariant="Dark">
+    <Application.Styles>
+        <FluentTheme />
+        <Style Selector="Window">
+            <Setter Property="Background" Value="#1F1F1F"/>
+            <Setter Property="FontFamily" Value="Segoe UI, Segoe MDL2 Assets"/>
+        </Style>
+
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#333333"/>
+            <Setter Property="BorderBrush" Value="#666666"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="0"/>
+            <Setter Property="Padding" Value="8,4"/>
+        </Style>
+        <Style Selector="Button:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#444444"/>
+            <Setter Property="BorderBrush" Value="#999999"/>
+        </Style>
+
+        <Style Selector="Button.Primary">
+            <Setter Property="Background" Value="#0078D7"/>
+            <Setter Property="BorderBrush" Value="#0078D7"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style Selector="Button.Primary:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#0086F0"/>
+            <Setter Property="BorderBrush" Value="#0086F0"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <Style Selector="Button.TitleBarButton">
+            <Setter Property="Width" Value="46"/>
+            <Setter Property="Height" Value="46"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+        </Style>
+        <Style Selector="Button.TitleBarButton:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#33FFFFFF"/>
+        </Style>
+        <Style Selector="Button.TitleBarButton.Close:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#E81123"/>
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="#333333"/>
+            <Setter Property="BorderBrush" Value="#666666"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="CornerRadius" Value="0"/>
+        </Style>
+        <Style Selector="TextBox:pointerover /template/ Border">
+            <Setter Property="BorderBrush" Value="#999999"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border">
+            <Setter Property="BorderBrush" Value="#0078D7"/>
+            <Setter Property="Background" Value="#1A1A1A"/>
+        </Style>
+
+        <Style Selector="ComboBox">
+            <Setter Property="Background" Value="#333333"/>
+            <Setter Property="BorderBrush" Value="#666666"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="0"/>
+        </Style>
+        <Style Selector="ComboBox:pointerover /template/ Border">
+            <Setter Property="BorderBrush" Value="#999999"/>
+        </Style>
+    </Application.Styles>
+</Application>

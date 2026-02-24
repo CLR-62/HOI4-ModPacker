@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="PiratePacker/App.axaml" value="PiratePacker/PiratePacker.csproj" />
+        <entry key="PiratePacker/MainWindow.axaml" value="PiratePacker/PiratePacker.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

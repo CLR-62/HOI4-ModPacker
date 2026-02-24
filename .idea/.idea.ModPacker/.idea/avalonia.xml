@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="ModPacker/App.axaml" value="ModPacker/ModPacker.csproj" />
+        <entry key="ModPacker/src/UI/MainWindow.axaml" value="ModPacker/ModPacker.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
