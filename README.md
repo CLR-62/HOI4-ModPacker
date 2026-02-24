@@ -15,5 +15,5 @@ The program performs the following actions:
 
 To get the mod working, the player needs to:
 
-1. Extract the contents of the archive to the following folder: Documents/Paradox Interactive/Hearts of Iron IV/mod/
+1. Extract the contents of the archive to the following folder: `Documents/Paradox Interactive/Hearts of Iron IV/mod/`
 2. **Attention!** When extracting, make sure to select **"Extract here"** (or "Extract to current folder"). This ensures that both the mod folder and the `.mod` file are placed directly inside the `mod` directory, rather than in a subfolder.
