@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ModPacker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5236475f147223f0e9b838b652b76dac10047958")]
 [assembly: System.Reflection.AssemblyProductAttribute("ModPacker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ModPacker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -6,10 +6,13 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
+using ModPacker.Localization;
 
 namespace ModPacker.UI;
 
@@ -24,6 +27,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        LocalizeManager.GetInstance.currentLangID = 0;
+        LocalizeForm();
         
         HeadPanel.PointerPressed += (s, e) =>
         {
@@ -33,6 +38,97 @@ public partial class MainWindow : Window
             }
         };
     }
+    
+    #region Localize
+
+    void LocalizeForm(int langID = 0)
+    {
+        List<Control> controls = GetControlsWithTagPrefix("KeyWord=");
+        Console.WriteLine(controls.Count);
+        foreach (var control in controls)
+        {
+            if (control.Tag is string tag)
+            {
+                Console.WriteLine(control.Name);
+                if (tag.StartsWith("KeyWord="))
+                {
+                    string localizedKey =
+                        tag.Split('=')[1].Translate(langID); //Это моё расширение(extension) для строк, смотрет в LocalizeExtensions
+
+                    switch (control) //Для разных типов контролов переводим разные вещи
+                    {
+                        case Button btn:
+                            btn.Content = localizedKey;
+                            break;
+                        case TextBlock textBlock:
+                            textBlock.Text = localizedKey;
+                            break;
+                        case TextBox textBox:
+                            textBox.Watermark = localizedKey;
+                            break;
+                        case ComboBoxItem comboBoxItem:
+                            comboBoxItem.Content = localizedKey;
+                            break;
+                        case ComboBox comboBox:
+                            comboBox.Text = localizedKey;
+                            break;
+                    } 
+                }
+            }
+        }
+    }
+    
+    public List<Control> GetControlsWithTagPrefix(string prefix)
+    {
+        return GetAllControls(this)
+            .Where(c => c.Tag?.ToString().StartsWith(prefix) == true)
+            .ToList();
+    }
+
+    private IEnumerable<Control> GetAllControls(Control parent)
+    {
+        if (parent == null) yield break;
+    
+        yield return parent;
+    
+        if (parent is Panel panel)
+        {
+            foreach (var child in panel.Children.OfType<Control>())
+            {
+                foreach (var subChild in GetAllControls(child))
+                {
+                    yield return subChild;
+                }
+            }
+        }
+        else if (parent is ContentControl contentControl && contentControl.Content is Control child)
+        {
+            foreach (var subChild in GetAllControls(child))
+            {
+                yield return subChild;
+            }
+        }
+        else if (parent is ItemsControl itemsControl)
+        {
+            foreach (var item in itemsControl.Items.OfType<Control>())
+            {
+                foreach (var subChild in GetAllControls(item))
+                {
+                    yield return subChild;
+                }
+            }
+        }
+        else if (parent is Decorator decorator && decorator.Child is Control decoratedChild)
+        {
+            foreach (var subChild in GetAllControls(decoratedChild))
+            {
+                yield return subChild;
+            }
+        }
+    }
+    
+    #endregion
+
 
     async void WindowOnLoaded(object? sender, RoutedEventArgs e)
     {
@@ -55,7 +151,7 @@ public partial class MainWindow : Window
 
         var folders = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions()
         {
-            Title = "Select mod folder",
+            Title = LocalizeManager.GetInstance.GetTranslation("SELECTMODFOLDER"),
             AllowMultiple = false
         });
 
@@ -326,6 +422,15 @@ public partial class MainWindow : Window
         }
     }
 
+    private void OnLanguageComboboxChanged(object? sender, SelectionChangedEventArgs e)
+    {
+        if (sender is ComboBox comboBox)
+        {
+            LocalizeManager.GetInstance.currentLangID = comboBox.SelectedIndex;
+            LocalizeForm(comboBox.SelectedIndex);
+        }
+    }
+
     private async void PackButtonClick(object? sender, RoutedEventArgs e) => await PackMod();
 
     private void OpenSelectedExplorer(string path)
@@ -350,5 +455,21 @@ public partial class MainWindow : Window
                 DestZipName =  textBox.Text;
             }
         }
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        LocalizeManager.GetInstance.SaveConfiguration();
+        base.OnClosed(e);
+    }
+
+    private void OnSettingClick(object? sender, RoutedEventArgs e)
+    {
+        SettingsPanel.IsVisible = true;
+    }
+
+    void OnCloseSettingClick(object? sender, RoutedEventArgs e)
+    {
+        SettingsPanel.IsVisible = false;
     }
 }

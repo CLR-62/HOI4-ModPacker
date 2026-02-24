@@ -1,0 +1,72 @@
+{
+  "Languages": [
+    "Русский",
+    "English"
+  ],
+  "Localizations": [
+    {
+      "Key": "PACK",
+      "Translations": [
+        "Запаковать",
+        "Pack"
+      ]
+    },
+    {
+      "Key": "ZIPNAME",
+      "Translations": [
+        "Название .Zip файла",
+        "Destination .Zip file name"
+      ]
+    },
+    {
+      "Key": "MODFILENAME",
+      "Translations": [
+        "Название .mod файла",
+        "Destination .mod file name"
+      ]
+    },
+    {
+      "Key": "MODRENAMING",
+      "Translations": [
+        "Смена названия мода",
+        "Mod name changing"
+      ]
+    },
+    {
+      "Key": "ASIS",
+      "Translations": [
+        "Оставить как есть",
+        "Leave it as it is"
+      ]
+    },
+    {
+      "Key": "CHANGETO",
+      "Translations": [
+        "Изменить на...",
+        "Change to..."
+      ]
+    },
+    {
+      "Key": "MODFOLDER",
+      "Translations": [
+        "Путь к папке мода",
+        "Mod folder path"
+      ]
+    },
+    {
+      "Key": "SELECTMODFOLDER",
+      "Translations": [
+        "Выберите папку мода",
+        "Select mod folder"
+      ]
+    },
+    {
+      "Key": "CLOSE",
+      "Translations": [
+        "Закрыть",
+        "Close"
+      ]
+    }
+  ],
+  "currentLangID": 0
+}

@@ -6,6 +6,11 @@
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
         <ApplicationIcon>src\Assets\piratePackerIcon.ico</ApplicationIcon>
+        <PublishSingleFile>true</PublishSingleFile>
+        <SelfContained>true</SelfContained>
+        <PublishTrimmed>true</PublishTrimmed>
+        <TrimMode>partial</TrimMode>  <!-- Более безопасный режим -->
+        <JsonSerializerIsReflectionEnabledByDefault>true</JsonSerializerIsReflectionEnabledByDefault>
     </PropertyGroup>
 
     <ItemGroup>
@@ -34,5 +39,12 @@
       <AvaloniaResource Include="src\Assets\piratePacker.png" />
       <None Remove="src\Assets\piratePackerIcon.png" />
       <AvaloniaResource Include="src\Assets\piratePackerIcon.png" />
+      <None Remove="src\Assets\default.json" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <AvaloniaResource Include="src\Assets\default.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </AvaloniaResource>
     </ItemGroup>
 </Project>
