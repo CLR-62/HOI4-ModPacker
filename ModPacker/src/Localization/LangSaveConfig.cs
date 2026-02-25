@@ -2,7 +2,7 @@
 
 namespace ModPacker.Localization;
 
-[System.Serializable]
+[System.Serializable ]
 public struct LangSaveConfig
 {
     public List<string> Languages { get; set; }

@@ -14,7 +14,7 @@ public class LocalizeManager
     private List<string> Languages = new();
     private List<KeyWord> Localizations = new();
 
-    private int _curLangId = 0;
+    private int _curLangId = 1;
     public int currentLangID
     {
         get { return _curLangId; }
@@ -23,6 +23,7 @@ public class LocalizeManager
         {
             if(value <= Languages.Count-1 && value >= 0)
             {
+                Console.WriteLine("SETTED TO " + value);
                 _curLangId = value;
             }
         }
@@ -73,19 +74,28 @@ public class LocalizeManager
     [UnconditionalSuppressMessage("Trimming", "IL2026:Members annotated with 'RequiresUnreferencedCodeAttribute' require dynamic access otherwise can break functionality when trimming application code", Justification = "<Pending>")]
     public void LoadConfiguration()
     {
-        
         string json = File.ReadAllText(cfgPath);
         
-        if(!String.IsNullOrWhiteSpace(json)) {
-        
-            LangSaveConfig? config = JsonSerializer.Deserialize<LangSaveConfig>(json);
-    
-            if (config != null)
+        if(!String.IsNullOrEmpty(json)) {
+            try
             {
-                Localizations = config.Value.Localizations;
-                Languages = config.Value.Languages;
-                currentLangID = config.Value.currentLangID;
+                Console.WriteLine("DESERIALIZING CONFIGURATION");
+                LangSaveConfig? config = JsonSerializer.Deserialize<LangSaveConfig>(json);
+    
+                if (config != null)
+                {
+                    Localizations = config.Value.Localizations;
+                    Languages = config.Value.Languages;
+                    _curLangId = config.Value.currentLangID;
+                
+                    Console.WriteLine(_curLangId);
+                }
             }
+            catch (Exception e)
+            {
+                LocalizationHealer.CreateDefaultConfiguration();
+            }
+            
         }
         else
         {
@@ -95,12 +105,28 @@ public class LocalizeManager
 
     public string GetTranslation(string keyword,int langID) //Exact lang
     {
+        try
+        {
         return Localizations.Where(x => x.Key == keyword).First().Translations[langID];
+        }
+        catch (Exception e)
+        {
+            LocalizationHealer.CreateDefaultConfiguration();
+            return Localizations.Where(x => x.Key == keyword).First().Translations[langID];
+        }
     }
 
     public string GetTranslation(string keyword) //Curent lang
     {
-        return Localizations.Where(x => x.Key == keyword).First().Translations[_curLangId];
+        try
+        {
+            return Localizations.Where(x => x.Key == keyword).First().Translations[_curLangId];
+        }
+        catch (Exception e)
+        {
+            LocalizationHealer.CreateDefaultConfiguration();
+            return Localizations.Where(x => x.Key == keyword).First().Translations[_curLangId];
+        }
     }
     
 }

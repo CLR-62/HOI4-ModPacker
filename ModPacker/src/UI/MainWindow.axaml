@@ -18,7 +18,7 @@
             <Grid ColumnDefinitions="Auto, *, Auto, Auto, Auto">
                 <Image Grid.Column="0" Source="../Assets/piratePackerIcon.png" Width="24" Height="24" Margin="12,0,8,0"></Image>
                 <!--<TextBlock Grid.Column="0" Text="&#xE724;" FontFamily="Segoe MDL2 Assets" VerticalAlignment="Center" Margin="12,0,8,0" Foreground="White" FontSize="14"/>-->
-                <TextBlock Grid.Column="1" Text="PiratePacker" VerticalAlignment="Center" Foreground="White" FontSize="14"/>
+                <TextBlock Grid.Column="1" Text="ModPacker" VerticalAlignment="Center" Foreground="White" FontSize="14"/>
                 
                 <Button Grid.Column="2" Classes="TitleBarButton" Content="⚙️" Click="OnSettingClick"  FontSize="20" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                 <Button Grid.Column="3" Classes="TitleBarButton" Content="─" Click="OnMinimize_Click" FontSize="20" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
@@ -86,15 +86,18 @@
                     BoxShadow="0 1 8 rgba(0,0,0,0.5)">
                 
                 <StackPanel Margin="20" Spacing="10">
-                    <TextBlock Text="Настройки" FontSize="14" Foreground="#CCCCCC"/>
+                    <TextBlock Text="Настройки" FontSize="14" Tag="KeyWord=SETTINGS" Foreground="#CCCCCC"/>
                     <StackPanel Spacing="8">
-                        <ComboBox HorizontalAlignment="Stretch" SelectedIndex="0" SelectionChanged="OnLanguageComboboxChanged">
+                        <ComboBox HorizontalAlignment="Stretch" x:Name="LangComboBox" SelectedIndex="0">
                             <ComboBoxItem>Русский</ComboBoxItem>
                             <ComboBoxItem>English</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
                     
-                    <Button Content="Close" Click="OnCloseSettingClick" Margin="0,60,0,0" Tag="KeyWord=CLOSE" VerticalAlignment="Bottom"></Button>
+                    <DockPanel HorizontalAlignment="Stretch">
+                        <Button Content="Close" Click="OnCloseSettingClick" Margin="0,60,0,0" Tag="KeyWord=CLOSE" VerticalAlignment="Bottom"></Button>
+                        <Button Content="Apply" Click="OnApplySettingClick" HorizontalAlignment="Right" Tag="KeyWord=APPLY" VerticalAlignment="Bottom"></Button>
+                    </DockPanel>
                 </StackPanel>
             </Border>
         </Border>

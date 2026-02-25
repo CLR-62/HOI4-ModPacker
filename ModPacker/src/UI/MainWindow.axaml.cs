@@ -6,12 +6,10 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
-using Avalonia.VisualTree;
 using ModPacker.Localization;
 
 namespace ModPacker.UI;
@@ -27,7 +25,9 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        LocalizeManager.GetInstance.currentLangID = 0;
+        ModRenameCombobox.Tag = "KeyWord=ASIS";
+        LangComboBox.SelectedIndex = LocalizeManager.GetInstance.currentLangID;
+        Console.WriteLine(LocalizeManager.GetInstance.currentLangID);
         LocalizeForm();
         
         HeadPanel.PointerPressed += (s, e) =>
@@ -41,19 +41,20 @@ public partial class MainWindow : Window
     
     #region Localize
 
-    void LocalizeForm(int langID = 0)
+    void LocalizeForm(int? langID = null)
     {
+        if (langID == null)
+            langID = LocalizeManager.GetInstance.currentLangID;
+        
         List<Control> controls = GetControlsWithTagPrefix("KeyWord=");
-        Console.WriteLine(controls.Count);
         foreach (var control in controls)
         {
             if (control.Tag is string tag)
             {
-                Console.WriteLine(control.Name);
                 if (tag.StartsWith("KeyWord="))
                 {
                     string localizedKey =
-                        tag.Split('=')[1].Translate(langID); //Это моё расширение(extension) для строк, смотрет в LocalizeExtensions
+                        tag.Split('=')[1].Translate(langID ?? 1); //Это моё расширение(extension) для строк, смотрет в LocalizeExtensions
 
                     switch (control) //Для разных типов контролов переводим разные вещи
                     {
@@ -142,6 +143,7 @@ public partial class MainWindow : Window
 
     private void OnClose_Click(object? sender, RoutedEventArgs e)
     {
+        LocalizeManager.GetInstance.SaveConfiguration();
         Close();
     }
 
@@ -413,21 +415,16 @@ public partial class MainWindow : Window
                 if (comboBox.SelectedIndex == 0)
                 {
                     NewModNameTextBox.IsEnabled = false;
+                    ModRenameCombobox.Tag = "KeyWord=ASIS";
                 }
                 else if (comboBox.SelectedIndex == 1)
                 {
                     NewModNameTextBox.IsEnabled = true;
+                    ModRenameCombobox.Tag = "KeyWord=CHANGETO";
                 }
+                
+                LocalizeForm();
             }
-        }
-    }
-
-    private void OnLanguageComboboxChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        if (sender is ComboBox comboBox)
-        {
-            LocalizeManager.GetInstance.currentLangID = comboBox.SelectedIndex;
-            LocalizeForm(comboBox.SelectedIndex);
         }
     }
 
@@ -471,5 +468,11 @@ public partial class MainWindow : Window
     void OnCloseSettingClick(object? sender, RoutedEventArgs e)
     {
         SettingsPanel.IsVisible = false;
+    }
+
+    private void OnApplySettingClick(object? sender, RoutedEventArgs e)
+    {
+        LocalizeManager.GetInstance.currentLangID = LangComboBox.SelectedIndex;
+        LocalizeForm(LangComboBox.SelectedIndex);
     }
 }
