@@ -2,8 +2,17 @@
 
 **ModPacker** is a utility designed to pack mods for pirated copies of *Hearts of Iron IV* that do not have access to the Steam Workshop.
 
-## How It Works
+![ModPacker Screenshot](https://github.com/CLR-62/HOI4-ModPacker/blob/master/ModPacker/src/Assets/screenshot.png "ModPacker screenshot")
 
+Program support both english and russian languages.
+
+## How to pack?
+1. In the "Mod folder path" section, select path to your mod folder(the folder that contains folders such as common, history, gfx, etc.)
+2. Program will automatically suggest destination zip file name and .mod file name, but you can change it as you want
+3. And if you preffer to change name of your mod(for example, i would like to add "Pirate" postfix for this version of the mod), you can select "Change to..." option in "Mod name changing" and write new name of mod below, or just leave selected option "Leave it as it is"
+4. Then press "Pack", depending on your PC specs and mod sizes, it may take a few minutes to copy and pack mod into archive. Folder with the packed zip archive will open automatically, but if it is not, then the archive can be found in "Dist" folder in the program directory.
+
+## How It Works
 The program performs the following actions:
 
 1. Takes the user-selected mod folder.
