@@ -1,8 +1,12 @@
 # ModPacker by CLR62 | 2026
 
 **ModPacker** is a utility designed to pack mods for pirated copies of *Hearts of Iron IV* that do not have access to the Steam Workshop.
-
-![ModPacker Screenshot](https://github.com/CLR-62/HOI4-ModPacker/blob/master/ModPacker/src/Assets/screenshot.png "ModPacker screenshot")
+<div align="center">
+   <div>
+      <img src="https://github.com/CLR-62/HOI4-ModPacker/blob/master/ModPacker/src/Assets/screenshot.png" alt="ModPacker screenshot">
+      <img Height="256" Width="256" src="https://github.com/CLR-62/HOI4-ModPacker/blob/master/ModPacker/src/Assets/piratePackerIcon.png" alt="ModPacker logo">
+   </div>
+</div>
 
 Program support both english and russian languages.
 
